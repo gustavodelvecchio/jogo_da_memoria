@@ -64,8 +64,10 @@ function flipCard() {
             if(game.checkMatch()){
                 game.clearCards();
                 if (game.checkGameOver()){
-                    let gameOverLayer = document.getElementById("gameOver");
-                    gameOverLayer.style.display = "flex";
+                    setTimeout(() => {
+                        let gameOverLayer = document.getElementById("gameOver");
+                        gameOverLayer.style.display = "flex";
+                    },400);
                 }
             } else {
                 setTimeout(() => {
@@ -82,8 +84,19 @@ function flipCard() {
 }
 
 function restart(){
-    game.clearCards();
-    startGame();
-    let gameOverLayer = document.getElementById("gameOver");
-    gameOverLayer.style.display = "none";
+
+    let cardsFlipped = document.querySelectorAll("div.flip");
+    
+    cardsFlipped.forEach((flipped) => {
+        flipped.classList.remove(FLIP);
+    })
+
+    setTimeout(() => {
+        game.clearCards();
+        startGame();
+        let gameOverLayer = document.getElementById("gameOver");
+        gameOverLayer.style.display = "none";
+
+    },500);
+
 }
